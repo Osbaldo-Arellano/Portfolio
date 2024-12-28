@@ -1,0 +1,87 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Build directories
+dist/
+build/
+.eslintcache
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+
+# Coverage reports
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Testing-related
+jest.config.js
+jest.setup.js
+*.snap
+
+# Generated files
+public/*.js
+public/*.map
+public/*.html
+public/favicon.ico
+public/manifest.json
+
+# Service Worker
+public/service-worker.js
+
+# Specific to parcel-bundler
+.cache/
+
+# React Native
+*.expo
+
+# MacOS
+*.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# npm / yarn integrity
+package-lock.json
+yarn.lock
+
+# Optional npm cache directory
+.npm/
+
+# Next.js
+.next/
+
+# Output of `npm pack`
+*.tgz
+
+# Parcel-bundler cache
+.cache/
+
+# Storybook
+out/
+
+# React Native
+*.expo
+.expo-shared/

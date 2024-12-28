@@ -1,0 +1,11 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #1a202c !important; /* Dark gray background */
+    color: #000000;           /* Light text color */
+    margin: 0;
+  }
+  
