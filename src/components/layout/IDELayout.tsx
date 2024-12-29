@@ -7,9 +7,7 @@ import FileDetail from '../FileDetail';
 import { TreeItem } from '../../types/FileTree';
 import MobileIDELayout from './MobileIDELayout';
 
-
 function IDELayout() {
-  // Set "ABOUTME.md" as the default open tab
   const aboutMeFile = fileTreeData.find((file) => file.name === 'ABOUTME.md') || null;
 
   const [openTabs, setOpenTabs] = useState<Array<TreeItem>>(
@@ -18,7 +16,6 @@ function IDELayout() {
   const [activeTab, setActiveTab] = useState<TreeItem | null>(aboutMeFile);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
-  // Update layout on resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener('resize', handleResize);
@@ -28,7 +25,6 @@ function IDELayout() {
     };
   }, []);
 
-  // Desktop-specific Split.js logic
   const leftContainerRef = useRef<HTMLDivElement>(null);
   const rightContainerRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +38,6 @@ function IDELayout() {
     }
   }, [isMobile]);
 
-  // Handle opening a file in a new tab
   const handleFileSelect = (node: TreeItem) => {
     if (!openTabs.find((tab) => tab.name === node.name)) {
       setOpenTabs((prevTabs) => [...prevTabs, node]);
@@ -50,7 +45,6 @@ function IDELayout() {
     setActiveTab(node);
   };
 
-  // Handle closing a tab
   const handleCloseTab = (tab: TreeItem) => {
     setOpenTabs((prevTabs) => prevTabs.filter((t) => t !== tab));
     if (activeTab === tab) {
@@ -58,23 +52,23 @@ function IDELayout() {
     }
   };
 
-  // Mobile layout (Optional placeholder)
   if (isMobile) {
-    return <MobileIDELayout/>;
+    return <MobileIDELayout />;
   }
 
-  // Desktop layout
   return (
-    <div className="flex h-full w-full bg-slate-400">
+    <div className="flex h-full w-full bg-gray-900 border border-gray-700 shadow-inner">
       {/* Left Panel */}
       <div
         ref={leftContainerRef}
-        className="flex flex-col w-full lg:w-[30%] overflow-auto flex-shrink-0"
+        className="flex flex-col w-full lg:w-[30%] bg-gray-800 border-r border-gray-700 overflow-auto"
         style={{ minWidth: '200px' }}
       >
-        <div className="flex-1">
+        {/* Info Panel */}
+        <div className="flex-1 border-b border-gray-700">
           <InfoPanel />
         </div>
+        {/* File Tree */}
         <div className="flex-1">
           <FileTree treeData={fileTreeData} onFileSelect={handleFileSelect} />
         </div>
@@ -83,17 +77,17 @@ function IDELayout() {
       {/* Right Panel */}
       <div
         ref={rightContainerRef}
-        className="flex-grow bg-slate-400 overflow-auto flex flex-col"
+        className="flex-grow bg-gray-950 overflow-auto flex flex-col"
       >
         {/* Tabs */}
         <div className="flex border-b border-gray-700 bg-gray-800">
           {openTabs.map((tab, index) => (
             <div
               key={index}
-              className={`px-4 py-2 cursor-pointer ${
+              className={`flex items-center px-4 py-2 cursor-pointer border-r border-gray-700 ${
                 activeTab === tab
                   ? 'bg-gray-900 text-white'
-                  : 'bg-gray-700 text-gray-300'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
               onClick={() => setActiveTab(tab)}
             >
@@ -103,7 +97,7 @@ function IDELayout() {
                   e.stopPropagation();
                   handleCloseTab(tab);
                 }}
-                className="ml-2 text-red-400 hover:text-red-600"
+                className="ml-2 text-red-500 hover:text-red-600"
               >
                 ✕
               </button>
@@ -112,7 +106,7 @@ function IDELayout() {
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow">
+        <div className="flex-grow bg-gray-900 text-gray-200 border-t border-gray-700">
           {activeTab ? (
             <FileDetail
               fileNode={activeTab}

@@ -23,38 +23,75 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
   const renderContent = () => {
     if (fileNode.type === FileType.MARKDOWN) {
       return (
-        <div className="markdown-body p-4">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ inline, className, children, ...props }: any) {
-                const match = /language-(\w+)/.exec(className || '');
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    style={dracula}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).trim()}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className="bg-gray-800 text-green-300 px-1 rounded" {...props}>
-                    {children}
-                  </code>
-                );
-              },
+        <div style={{ margin: '0', padding: '0' }}>
+          {/* Banner */}
+          <div
+            style={{
+              textAlign: 'center',
+              backgroundColor: '#1e1e2f',
+              margin: '0',
+              padding: '0', // Ensure no padding around the banner
+              width: '100%', // Ensure the container spans the full width
             }}
           >
-            {fileNode.content as string}
-          </ReactMarkdown>
+            <img
+              src="https://raw.githubusercontent.com/Osbaldo-Arellano/pictures/refs/heads/main/github-header-image(9).png"
+              alt="Banner"
+              style={{
+                width: '100%', // Make the image take up the full width
+                height: 'auto', // Maintain aspect ratio
+                display: 'block', // Remove any inline gap caused by `img` tags
+              }}
+            />
+          </div>
+
+          {/* Markdown Content */}
+          <div className="markdown-body p-4">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({ inline, className, children, ...props }: any) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      style={dracula}
+                      language={match[1]}
+                      PreTag="div"
+                      customStyle={{
+                        margin: '0',
+                        padding: '1rem',
+                        borderRadius: '4px',
+                        backgroundColor: '#1e1e2f',
+                      }}
+                      {...props}
+                    >
+                      {String(children).trim()}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code
+                      className="bg-gray-800 text-green-300 px-1 rounded"
+                      style={{
+                        margin: '0',
+                        display: 'block',
+                      }}
+                      {...props}
+                    >
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            >
+              {fileNode.content as string}
+            </ReactMarkdown>
+          </div>
         </div>
       );
     }
 
     if (fileNode.type === FileType.TYPESCRIPT || fileNode.type === FileType.JAVASCRIPT) {
       return (
-        <SyntaxHighlighter language="typescript" style={dracula}>
+        <SyntaxHighlighter language="typescript" style={dracula} customStyle={{ margin: '0' }}>
           {fileNode.content as string}
         </SyntaxHighlighter>
       );
@@ -69,23 +106,6 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
 
   return (
     <div className="w-full h-full bg-gray-900 text-gray-300 border border-gray-700 shadow-lg flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between bg-gray-800 text-gray-200 h-10 px-4 border-b border-gray-700">
-        <h2
-          className={`text-base font-semibold tracking-wide uppercase ${
-            fileNode.isFolder ? 'text-blue-400' : fileNode.content ? 'text-green-400' : 'text-red-400'
-          }`}
-        >
-          {fileNode.isFolder ? '📂' : fileNode.content ? '📄' : '❌'} {fileNode.name}
-        </h2>
-        <button
-          onClick={onClose}
-          className="bg-red-600 text-white text-sm font-bold px-3 py-1 uppercase tracking-wider hover:bg-red-700 transition duration-300"
-        >
-          Close
-        </button>
-      </div>
-
       {/* Content */}
       <div
         className={`flex-1 ${

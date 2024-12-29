@@ -1,138 +1,21 @@
-# ISMA
-
-## Heading 2
-
-### Heading 3
-
-This is a paragraph with **bold text**, *italic text*, and ~~strikethrough~~.
-
-Here is a list:
-- Item 1
-- Item 2
-  - Subitem 2.1
-  - Subitem 2.2
-- Item 3
-
-Here is an ordered list:
-1. First
-2. Second
-3. Third
-
-Here is a link: [Google](https://www.google.com)
-
-Here is some inline code: `console.log('Hello, world!')`
-
-### Code Block
-
+## Life Stack
 ```javascript
-function sayHello(name) {
-  console.log(`Hello, ${name}!`);
+const Identity = {
+  Name: "Osbaldo Arellano Hernandez",
+  origin: "Gervais, Oregon",
+  journey: "Transitioned from HVAC technician apprentice to computer science graduate.",
+  passions: ["building computer systems", "empowering underrepresented communities"],
+  code: [C, C++, Javascript, Typescript, Python],
+  tools: [Azure, AWS, Cloud, React, Node, Docker],
+  architecture: ["microservices", "event-driven", "cloud"],
+  organizations: {
+    member: ["Louis Stokes Alliance for Minority Participation (LSAMP)", "Society of Hispanic Professional Engineers (SHPE)"],
+    representative: "United States Hispanic Leadership Conference",
+    mentor: "Woodburn High School"
+  },
+  challenge: "LAND A JOB.",
+  vision: "Combine technology with social justice to create equitable systems."
 }
-sayHello('World');
 ```
-
-
-# ISMA
-
-## Heading 2
-
-### Heading 3
-
-This is a paragraph with **bold text**, *italic text*, and ~~strikethrough~~.
-
-Here is a list:
-- Item 1
-- Item 2
-  - Subitem 2.1
-  - Subitem 2.2
-- Item 3
-
-Here is an ordered list:
-1. First
-2. Second
-3. Third
-
-Here is a link: [Google](https://www.google.com)
-
-Here is some inline code: `console.log('Hello, world!')`
-
-### Code Block
-
-```javascript
-function sayHello(name) {
-  console.log(`Hello, ${name}!`);
-}
-sayHello('World');
-```
-
-
-
-# ISMA
-
-## Heading 2
-
-### Heading 3
-
-This is a paragraph with **bold text**, *italic text*, and ~~strikethrough~~.
-
-Here is a list:
-- Item 1
-- Item 2
-  - Subitem 2.1
-  - Subitem 2.2
-- Item 3
-
-Here is an ordered list:
-1. First
-2. Second
-3. Third
-
-Here is a link: [Google](https://www.google.com)
-
-Here is some inline code: `console.log('Hello, world!')`
-
-### Code Block
-
-```javascript
-function sayHello(name) {
-  console.log(`Hello, ${name}!`);
-}
-sayHello('World');
-```
-
-
-
-# ISMA
-
-## Heading 2
-
-### Heading 3
-
-This is a paragraph with **bold text**, *italic text*, and ~~strikethrough~~.
-
-Here is a list:
-- Item 1
-- Item 2
-  - Subitem 2.1
-  - Subitem 2.2
-- Item 3
-
-Here is an ordered list:
-1. First
-2. Second
-3. Third
-
-Here is a link: [Google](https://www.google.com)
-
-Here is some inline code: `console.log('Hello, world!')`
-
-### Code Block
-
-```javascript
-function sayHello(name) {
-  console.log(`Hello, ${name}!`);
-}
-sayHello('World');
-```
-
-
+---
+Thank you for stopping by! Feel free to connect and collaborate. 🚀
