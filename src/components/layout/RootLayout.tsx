@@ -21,7 +21,7 @@ function RootLayout() {
         </div>
 
 
-        {/* Links */}
+        {/* Links
         <div className="flex gap-4">
           <a
             href="https://open.spotify.com/playlist/your-playlist-id" // Replace with your Spotify playlist URL
@@ -39,7 +39,7 @@ function RootLayout() {
           >
             🐙 GitHub
           </a>
-        </div>
+        </div> */}
       </div>
 
       {/* Sidebar and Main Content */}

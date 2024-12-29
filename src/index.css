@@ -9,3 +9,21 @@ body {
     margin: 0;
   }
   
+.spotify-container {
+  font-family: "Courier New", monospace;
+  background-color: #e5e5e5;
+  border: 2px solid #5a5a5a;
+  box-shadow: 2px 2px 0px #ffffff, -2px -2px 0px #5a5a5a;
+  padding: 10px;
+}
+
+.spotify-header {
+  background-color: #c3c3c3;
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: 2px solid #5a5a5a;
+}
+
+audio {
+  width: 100%;
+}

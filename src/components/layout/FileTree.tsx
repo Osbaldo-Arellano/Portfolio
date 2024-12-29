@@ -10,9 +10,6 @@ function FileTree({
 }) {
   return (
     <div className="w-full h-full bg-gray-200 text-black border border-gray-400 shadow-inner font-sans">
-      <p className="text-sm font-bold text-black bg-gray-300 border-b border-gray-400 py-1 px-2">
-        📂 File Explorer
-      </p>
       <ul className="mt-2">
         {treeData.map((item, i) => (
           <TreeNode key={i} node={item} onFileSelect={onFileSelect} level={0} />
