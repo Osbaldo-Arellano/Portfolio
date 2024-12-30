@@ -122,7 +122,7 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
         {fileNode.isFolder
           ? '📁 Navigate to a file to view its contents.'
           : fileNode.content
-          ? '📝 Viewing file content.'
+          ? '👀 READ ONLY'
           : '🚫 No content found.'}
       </div>
     </div>
