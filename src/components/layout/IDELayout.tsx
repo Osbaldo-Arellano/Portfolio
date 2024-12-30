@@ -137,10 +137,10 @@ function IDELayout() {
       {/* Right Panel */}
       <div
         ref={rightContainerRef}
-        className="flex-grow bg-gray-200 overflow-auto flex flex-col"
+        className="flex-grow bg-gray-200 flex flex-col overflow-hidden"
       >
         {/* Tabs */}
-        <div className="flex border-b border-gray-400 bg-gray-300">
+        <div className="flex border-b border-gray-400 bg-gray-300 flex-shrink-0">
           {openTabs.map((tab, index) => (
             <div
               key={index}
@@ -166,12 +166,20 @@ function IDELayout() {
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow bg-white text-black border-t border-gray-400">
+        <div
+          className="flex-grow bg-white text-black border-t border-gray-400 overflow-hidden"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {activeTab ? (
-            <FileDetail
-              fileNode={activeTab}
-              onClose={() => handleCloseTab(activeTab)}
-            />
+            <div className="flex-grow overflow-auto">
+              <FileDetail
+                fileNode={activeTab}
+                onClose={() => handleCloseTab(activeTab)}
+              />
+            </div>
           ) : (
             <div className="flex items-center justify-center h-full text-gray-600">
               <p>No tab selected.</p>
@@ -179,6 +187,7 @@ function IDELayout() {
           )}
         </div>
       </div>
+
     </div>
   );
 }
