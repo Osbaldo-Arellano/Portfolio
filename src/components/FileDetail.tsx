@@ -122,7 +122,7 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
       <div
         className="flex-1 overflow-y-auto"
         style={{
-          padding: "1rem", // Add some padding for visual spacing
+          padding: "1rem",
         }}
       >
         {renderContent()}
