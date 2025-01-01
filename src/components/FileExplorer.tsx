@@ -15,7 +15,7 @@ interface FileExplorerProps {
 const FileExplorer: React.FC<FileExplorerProps> = ({ nodes }) => {
   return (
     <div className="bg-white border border-gray-300 rounded shadow p-4 w-full max-w-md text-sm">
-      {/* Optional Explorer Header */}
+      {/*  Explorer Header */}
       <div className="mb-2 pb-2 border-b border-gray-200 font-bold text-gray-700">
         File Explorer
       </div>
