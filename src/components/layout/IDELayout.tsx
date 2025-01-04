@@ -71,13 +71,13 @@ function IDELayout() {
       {/* Left Panel */}
       <div
         ref={leftContainerRef}
-        className="flex flex-col w-full lg:w-[30%] bg-gray-300 overflow-hidden"
-        style={{ minWidth: "200px" }}
+        className="flex flex-col w-full lg:w-[30%] bg-gray-300 overflow-y-auto hide-scrollbar"
+        style={{ minWidth: "200px", maxHeight: "100vh" }} // Constrain height to viewport
       >
         {/* Info Panel */}
         <div
           className="flex-shrink-0 border-b border-gray-400"
-          style={{ maxHeight: "580px", overflowY: "auto" }}
+          style={{ overflowY: "auto" }}
         >
           <InfoPanel />
         </div>
@@ -133,6 +133,7 @@ function IDELayout() {
           </div>
         </div>
       </div>
+
 
       {/* Right Panel */}
       <div

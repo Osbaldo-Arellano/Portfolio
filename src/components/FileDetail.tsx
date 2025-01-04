@@ -26,7 +26,7 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
         <div className="flex flex-col h-full">
           {/* Markdown Content */}
           <div
-            className="flex-1 overflow-y-auto p-4 markdown-body bg-gray-800 text-gray-300 sm:p-3 md:p-5 lg:p-6"
+            className="flex-1 overflow-y-auto p-4 markdown-body bg-gray-800 text-gray-300 sm:p-3 md:p-5 lg:p-6 hide-scrollbar"
             style={{
               borderRadius: "4px",
             }}
@@ -120,7 +120,7 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
     >
       {/* Scrollable Content */}
       <div
-        className="flex-1 overflow-y-auto"
+        className="flex-1 overflow-y-auto hover-scroll "
         style={{
           padding: "1rem",
         }}

@@ -77,4 +77,84 @@ export const fileTreeData: TreeItem[] = [
       },
     ],
   },
+  {
+    name: 'src-temp',
+    isFolder: true,
+    children: [
+      {
+        name: 'Asset-Temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/Asset-Temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: assetTempContent,
+      },
+      {
+        name: 'main-asset-temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/main-asset-temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: mainAssetTempContent,
+      },
+    ],
+  },
+  {
+    name: 'src-temp',
+    isFolder: true,
+    children: [
+      {
+        name: 'Asset-Temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/Asset-Temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: assetTempContent,
+      },
+      {
+        name: 'main-asset-temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/main-asset-temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: mainAssetTempContent,
+      },
+    ],
+  },
+  {
+    name: 'src-temp',
+    isFolder: true,
+    children: [
+      {
+        name: 'Asset-Temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/Asset-Temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: assetTempContent,
+      },
+      {
+        name: 'main-asset-temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/main-asset-temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: mainAssetTempContent,
+      },
+    ],
+  },
+  {
+    name: 'src-temp',
+    isFolder: true,
+    children: [
+      {
+        name: 'Asset-Temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/Asset-Temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: assetTempContent,
+      },
+      {
+        name: 'main-asset-temp.tsx',
+        isFolder: false,
+        filePath: 'src/src-temp/main-asset-temp.tsx',
+        type: FileType.TYPESCRIPT,
+        content: mainAssetTempContent,
+      },
+    ],
+  },
 ];
