@@ -25,12 +25,12 @@ function InfoPanel() {
 
         {/* Name */}
         <h2 className="text-lg font-bold text-black text-center tracking-wide mb-2">
-          👋 Osbaldo Arellano
+          Osbaldo Arellano
         </h2>
 
         {/* Description */}
         <p className="text-sm text-black text-center leading-relaxed mb-4">
-          💻 Computer Science <br /> 🦫 Oregon State University
+          Computer Science <br /> Oregon State University
         </p>
         
 

@@ -42,11 +42,29 @@ function IDELayout() {
     if (!isMobile && leftContainerRef.current && rightContainerRef.current) {
       Split([leftContainerRef.current, rightContainerRef.current], {
         sizes: [30, 70],
-        gutterSize: 4,
+        gutterSize: 5,       // Increase gutter thickness
         minSize: [200, 300],
+        snapOffset: 10,      // Snap to this offset
+        dragInterval: 1,     // Only allow moves in increments of 1px
+        gutter: (index, direction) => {
+          const gutterElement = document.createElement("div");
+          gutterElement.className = `
+            flex items-center justify-center
+            bg-gray-900 text-white
+            gutter
+            gutter-${direction}
+            cursor-${direction === "horizontal" ? "col" : "row"}-resize
+          `;
+          // Optionally add an icon or text inside
+          gutterElement.innerHTML = "⋮";
+  
+          return gutterElement;
+        },
       });
     }
   }, [isMobile]);
+  
+  
 
   const handleFileSelect = (node: TreeItem) => {
     if (!openTabs.find((tab) => tab.name === node.name)) {
@@ -66,13 +84,36 @@ function IDELayout() {
     return <MobileIDELayout />;
   }
 
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.dataTransfer.setData("tabIndex", index.toString());
+  };
+  
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    const draggingIndex = parseInt(e.dataTransfer.getData("tabIndex"), 10);
+  
+    // Rearrange the tabs
+    if (draggingIndex !== index) {
+      const updatedTabs = [...openTabs];
+      const [draggedTab] = updatedTabs.splice(draggingIndex, 1); // Remove dragged tab
+      updatedTabs.splice(index, 0, draggedTab); // Insert dragged tab at new index
+      setOpenTabs(updatedTabs); // Update state
+    }
+  };
+  
   return (
     <div className="flex h-full w-full bg-gray-200 shadow-inner">
       {/* Left Panel */}
       <div
         ref={leftContainerRef}
-        className="flex flex-col w-full lg:w-[30%] bg-gray-300 overflow-y-auto hide-scrollbar"
-        style={{ minWidth: "200px", maxHeight: "100vh" }} // Constrain height to viewport
+        className="
+          flex flex-col 
+          w-full lg:w-[30%] 
+          bg-transparent 
+          overflow-y-auto 
+          hide-scrollbar
+          border-r    
+        "
+        style={{ minWidth: "200px", maxHeight: "100vh" }}
       >
         {/* Info Panel */}
         <div
@@ -138,33 +179,37 @@ function IDELayout() {
       {/* Right Panel */}
       <div
         ref={rightContainerRef}
-        className="flex-grow bg-gray-200 flex flex-col overflow-hidden"
+        className="flex-grow bg-gray-200 flex flex-col overflow-hidden border-l"
       >
-        {/* Tabs */}
-        <div className="flex border-b border-gray-400 bg-gray-300 flex-shrink-0">
-          {openTabs.map((tab, index) => (
-            <div
-              key={index}
-              className={`flex items-center px-4 py-1 cursor-pointer border-r border-gray-400 ${
-                activeTab === tab
-                  ? "bg-gray-400 text-black"
-                  : "bg-gray-300 text-black hover:bg-gray-200"
-              }`}
-              onClick={() => setActiveTab(tab)}
+      {/* Tabs */}
+      <div className="flex border-b border-gray-400 bg-gray-300 flex-shrink-0">
+        {openTabs.map((tab, index) => (
+          <div
+            key={index}
+            draggable
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={(e) => e.preventDefault()} // Allow drop by preventing default behavior
+            onDrop={(e) => handleDrop(e, index)}
+            className={`flex items-center px-4 py-1 cursor-pointer border-r border-gray-400 ${
+              activeTab === tab
+                ? "bg-gray-400 text-black"
+                : "bg-gray-300 text-black hover:bg-gray-200"
+            }`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab.name}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCloseTab(tab);
+              }}
+              className="ml-2 text-red-600 hover:text-red-800"
             >
-              {tab.name}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCloseTab(tab);
-                }}
-                className="ml-2 text-red-600 hover:text-red-800"
-              >
-                ✕
-              </button>
-            </div>
-          ))}
-        </div>
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
 
         {/* Content Area */}
         <div
