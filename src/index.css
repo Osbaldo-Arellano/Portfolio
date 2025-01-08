@@ -82,3 +82,28 @@ html, body, #root {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.file-item {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.file-item:hover {
+  background-color: #e2e8f0; /* Light gray hover */
+  cursor: pointer;
+}
+
+
+.fade-in-animation {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

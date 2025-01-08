@@ -9,7 +9,7 @@ function FileTree({
   onFileSelect: (node: TreeItem) => void;
 }) {
   return (
-    <div className="w-full h-full bg-gray-200 text-black border border-gray-400 shadow-inner font-sans">
+    <div className="file-item w-full h-full bg-gray-200 text-black border border-gray-400 shadow-inner font-sans">
       <ul className="mt-2">
         {treeData.map((item, i) => (
           <TreeNode key={i} node={item} onFileSelect={onFileSelect} level={0} />

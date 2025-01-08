@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { HomeIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 
 function RootLayout() {
@@ -26,8 +25,7 @@ function RootLayout() {
         <nav
           className="bg-gray-300 border-r border-gray-400 flex flex-col overflow-auto mr-1"
         >
-          <div className="bg-gray-400 px-3 py-2 text-sm font-bold text-black">
-            📂
+          <div className="bg-none px-4 py-2">
           </div>
         </nav>
 

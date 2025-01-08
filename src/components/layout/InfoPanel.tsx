@@ -30,7 +30,7 @@ function InfoPanel() {
 
         {/* Description */}
         <p className="text-sm text-black text-center leading-relaxed mb-4">
-          Computer Science <br /> Oregon State University
+          💻 Computer Science <br /> Oregon State University
         </p>
         
 
@@ -52,10 +52,18 @@ function InfoPanel() {
           >
             🐙 GitHub
           </a>
+          <a
+            href="https://blogs.oregonstate.edu/ozzythecomputerguy/about-me/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-start bg-gray-300 text-black px-3 py-1 border border-gray-400 hover:bg-gray-200 transition-all text-sm"
+          >
+            🖥️ OSU Blog
+          </a>
         </div>
 
         {/* Spotify Embed */}
-        <div className="w-full mt-2">
+        {/* <div className="w-full mt-2">
           <div
             className="flex items-center justify-between bg-gray-300 text-black px-3 py-1 border border-gray-400 hover:bg-gray-200 cursor-pointer text-sm"
             onClick={toggleCollapse}
@@ -88,7 +96,7 @@ function InfoPanel() {
               ></iframe>
             </div>
           )}
-        </div>
+        </div> */}
 
       </div>
     </div>

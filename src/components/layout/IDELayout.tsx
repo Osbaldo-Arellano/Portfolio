@@ -37,15 +37,14 @@ function IDELayout() {
 
   const leftContainerRef = useRef<HTMLDivElement>(null);
   const rightContainerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (!isMobile && leftContainerRef.current && rightContainerRef.current) {
       Split([leftContainerRef.current, rightContainerRef.current], {
         sizes: [30, 70],
-        gutterSize: 5,       // Increase gutter thickness
+        gutterSize: 5,
         minSize: [200, 300],
-        snapOffset: 10,      // Snap to this offset
-        dragInterval: 1,     // Only allow moves in increments of 1px
+        snapOffset: 10, // Snap to this offset
+        dragInterval: 1, // Only allow moves in increments of 1px
         gutter: (index, direction) => {
           const gutterElement = document.createElement("div");
           gutterElement.className = `
@@ -53,17 +52,19 @@ function IDELayout() {
             bg-gray-400 text-white
             gutter
             gutter-${direction}
-            cursor-${direction === "horizontal" ? "col" : "row"}-resize
           `;
-          // Optionally add an icon or text inside
-          gutterElement.innerHTML = "<span class='gutter-handle'>⋮</span>"; // Optional icon or handle
   
+          // Adjust cursor based on direction to indicate drag behavior
+          gutterElement.style.cursor = direction === "horizontal" ? "col-resize" : "row-resize";
+  
+          // Add the text and style it to prevent selection
+          gutterElement.innerHTML = "<span class='gutter-handle'>⋮</span>";
+
           return gutterElement;
         },
       });
     }
   }, [isMobile]);
-  
   
 
   const handleFileSelect = (node: TreeItem) => {
