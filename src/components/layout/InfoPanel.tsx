@@ -11,7 +11,7 @@ function InfoPanel() {
     <div className="w-full h-full bg-gray-200 p-4 border border-gray-400 shadow-inner">
       {/* Header */}
       <div className="bg-gray-300 border-b border-gray-400 px-3 py-2 text-sm font-bold text-black">
-        📄 Welcome to my portfolio
+      👋 Welcome to my portfolio
       </div>
 
       {/* Content */}

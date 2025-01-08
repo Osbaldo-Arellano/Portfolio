@@ -6,6 +6,7 @@ export enum FileType {
   HTML = 'html',
   FOLDER = 'folder',
   OTHER = 'other',
+  TSX = 'tsx'
 }
 
 export type TreeItem = {

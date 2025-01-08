@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { TreeItem, FileType } from "../types/FileTree";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -24,12 +24,9 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
     if (fileNode.type === FileType.MARKDOWN) {
       return (
         <div className="flex flex-col h-full">
-          {/* Markdown Content */}
           <div
             className="flex-1 overflow-y-auto p-4 markdown-body bg-gray-800 text-gray-300 sm:p-3 md:p-5 lg:p-6 hide-scrollbar"
-            style={{
-              borderRadius: "4px",
-            }}
+            style={{ borderRadius: "4px" }}
           >
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -77,22 +74,17 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
       );
     }
 
-    if (fileNode.type === FileType.TYPESCRIPT || fileNode.type === FileType.JAVASCRIPT) {
+    if (fileNode.type === FileType.TYPESCRIPT) {
+      // Dynamically import the component
+      const DynamicComponent = lazy(() => import(`../${fileNode.filePath}`));
+
       return (
-        <SyntaxHighlighter
-          language="typescript"
-          style={dracula}
-          customStyle={{
-            margin: "0",
-            padding: "1rem",
-            borderRadius: "4px",
-            height: "auto", // Allow dynamic growth/shrink
-          }}
-        >
-          {fileNode.content as string}
-        </SyntaxHighlighter>
+        <Suspense fallback={<div></div>}>
+          <DynamicComponent />
+        </Suspense>
       );
     }
+    
 
     if (typeof fileNode.content === "string") {
       return (
@@ -114,13 +106,10 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
   return (
     <div
       className="w-full h-full bg-gray-900 text-gray-300 border border-gray-700 shadow-lg flex flex-col"
-      style={{
-        maxHeight: "100vh", // Full viewport height
-      }}
+      style={{ maxHeight: "100vh" }}
     >
-      {/* Scrollable Content */}
       <div
-        className="flex-1 overflow-y-auto hover-scroll "
+        className="flex-1 overflow-y-auto hover-scroll"
         style={{
           padding: "1rem",
         }}
@@ -128,12 +117,9 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
         {renderContent()}
       </div>
 
-      {/* Footer */}
       <div
         className="bg-gray-800 text-gray-400 text-center py-2 border-t border-gray-700"
-        style={{
-          flexShrink: 0, // Prevent the footer from shrinking
-        }}
+        style={{ flexShrink: 0 }}
       >
         {fileNode.isFolder
           ? "📁 Navigate to a file to view its contents."
