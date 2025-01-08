@@ -50,13 +50,13 @@ function IDELayout() {
           const gutterElement = document.createElement("div");
           gutterElement.className = `
             flex items-center justify-center
-            bg-gray-900 text-white
+            bg-gray-400 text-white
             gutter
             gutter-${direction}
             cursor-${direction === "horizontal" ? "col" : "row"}-resize
           `;
           // Optionally add an icon or text inside
-          gutterElement.innerHTML = "⋮";
+          gutterElement.innerHTML = "<span class='gutter-handle'>⋮</span>"; // Optional icon or handle
   
           return gutterElement;
         },
