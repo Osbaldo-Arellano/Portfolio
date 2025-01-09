@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function InfoPanel() {
-  const [isCollapsed, setIsCollapsed] = useState(true); // Collapsed by default
+  const [isCollapsed, setIsCollapsed] = useState(true); 
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
