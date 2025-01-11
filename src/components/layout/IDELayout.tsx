@@ -25,6 +25,11 @@ function IDELayout() {
     { name: "assets", isFolder: true, children: [] },
     { name: "components", isFolder: true, children: [] },
   ]; // Data for Explorer 2
+  const explorer3Data = [
+    { name: "README.md", isFolder: false },
+    { name: "assets", isFolder: true, children: [] },
+    { name: "components", isFolder: true, children: [] },
+  ]; // Data for Explorer 2
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -154,6 +159,22 @@ function IDELayout() {
               } text-black border border-gray-400 rounded-t-lg px-4 py-2 cursor-pointer`}
               style={{
                 marginRight: "2px",
+                marginBottom: activeExplorer === "Explorer 3" ? "0px" : "2px",
+              }}
+              onClick={() => setActiveExplorer("Explorer 3")}
+            >
+              📂 Personal Projects
+            </div>
+
+            {/* Explorer 3 Tab */}
+            <div
+              className={`relative z-10 ${
+                activeExplorer === "Explorer 2"
+                  ? "bg-gray-300"
+                  : "bg-gray-200 hover:bg-gray-300"
+              } text-black border border-gray-400 rounded-t-lg px-4 py-2 cursor-pointer`}
+              style={{
+                marginRight: "2px",
                 marginBottom: activeExplorer === "Explorer 2" ? "0px" : "2px",
               }}
               onClick={() => setActiveExplorer("Explorer 2")}
@@ -171,6 +192,9 @@ function IDELayout() {
             )}
             {activeExplorer === "Explorer 2" && (
               <FileTree treeData={explorer2Data} onFileSelect={handleFileSelect} />
+            )}
+            {activeExplorer === "Explorer 3" && (
+              <FileTree treeData={explorer3Data} onFileSelect={handleFileSelect} />
             )}
           </div>
         </div>

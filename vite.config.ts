@@ -7,7 +7,7 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       loader: {
-        '.tsx': 'text', // Use text loader for .tsx files
+        '.tsx': 'text', 
       },
     },
   },

@@ -74,9 +74,22 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
       );
     }
 
+    if (fileNode.type === FileType.PDF) {
+      console.log(fileNode.filePath)
+      return (
+        <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+          <iframe
+            src={fileNode.filePath}
+            title="PDF Viewer"
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+          ></iframe>
+        </div>
+      );
+    }
+
     if (fileNode.type === FileType.TYPESCRIPT) {
       // Dynamically import the component
-      const DynamicComponent = lazy(() => import(`../${fileNode.filePath}`));
+      const DynamicComponent = lazy(() => import(`../${fileNode.filePath}`)/* @vite-ignore */);
 
       return (
         <Suspense fallback={<div></div>}>
