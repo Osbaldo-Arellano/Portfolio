@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from "react";
-import { TreeItem, FileType } from "../types/FileTree";
+import React, { Suspense, lazy, useState } from "react";
+import { TreeItem, FileType, Permissions } from "../types/FileTree";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import ReactMarkdown from "react-markdown";
@@ -75,13 +75,33 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
     }
 
     if (fileNode.type === FileType.PDF) {
-      console.log(fileNode.filePath)
+      const [loading, setLoading] = useState(true);
+    
       return (
-        <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
+        <div style={{ width: "100%", height: "100%", overflow: "hidden", position: "relative" }}>
+          {loading && (
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#1a1a1a", 
+                color: "#fff", 
+              }}
+            >
+              Loading PDF...
+            </div>
+          )}
           <iframe
             src={fileNode.filePath}
             title="PDF Viewer"
             style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            onLoad={() => setLoading(false)} 
           ></iframe>
         </div>
       );
@@ -89,7 +109,10 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
 
     if (fileNode.type === FileType.TYPESCRIPT) {
       // Dynamically import the component
-      const DynamicComponent = lazy(() => import(`../${fileNode.filePath}`)/* @vite-ignore */);
+      const DynamicComponent = lazy(
+        () => import(`../${fileNode.filePath}`)
+        /* @vite-ignore */
+      );
 
       return (
         <Suspense fallback={<div></div>}>
@@ -134,12 +157,22 @@ function FileDetail({ fileNode, onClose }: FileDetailProps) {
         className="bg-gray-800 text-gray-400 text-center py-2 border-t border-gray-700"
         style={{ flexShrink: 0 }}
       >
-        {fileNode.isFolder
-          ? "📁 Navigate to a file to view its contents."
-          : fileNode.content
-          ? "👀 READ ONLY"
-          : "🚫 No content found."}
+        {fileNode.isFolder ? (
+          "📁 Navigate to a file to view its contents."
+        ) : fileNode.permissions === Permissions.READONLY ? (
+          "👀 READONLY"
+        ) : fileNode.permissions === Permissions.WRITE ? (
+          "✏️ WRITE"
+        ) : fileNode.permissions === Permissions.EXECUTE ? (
+          "⚙️ EXE"
+        )
+        : fileNode.permissions === Permissions.LISTENONLY ? (
+          "👂 LISTENONLY"
+        ) : (
+          "🚫 No content found or insufficient permissions."
+        )}
       </div>
+
     </div>
   );
 }

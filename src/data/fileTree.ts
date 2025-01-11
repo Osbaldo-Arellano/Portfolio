@@ -1,6 +1,6 @@
 import { FileType, Permissions, TreeItem } from '../types/FileTree';
 
-// Import raw file contents directly
+
 import aboutMeContent from '../files/ABOUTME.md?raw';
 import CloudBlogPost from '../../src/files/src/blog-posts/cloud-project/Kube-day-1.md?raw'
 import CloudBlogPost2 from '../../src/files/src/blog-posts/cloud-project/Kube-day-2.md?raw'
@@ -69,22 +69,6 @@ export const fileTreeData: TreeItem[] = [
           },
         ]
       },
-      // {
-      //   name: 'main.tsx',
-      //   isFolder: false,
-      //   filePath: 'files/Main.tsx', 
-      //   type: FileType.TYPESCRIPT,
-      //   content: '', // Leave content empty for dynamic import
-      // },
-
-      // {
-      //   name: 'Playlist.tsx',
-      //   isFolder: false,
-      //   filePath: 'files/Playlist.tsx', 
-      //   type: FileType.TYPESCRIPT,
-      //   content: '', // Leave content empty for dynamic import
-      // }
-      
     ],
   },
   {
@@ -92,6 +76,15 @@ export const fileTreeData: TreeItem[] = [
     isFolder: false,
     filePath: 'files/ContactMe.tsx', 
     type: FileType.TYPESCRIPT,
+    permissions: Permissions.WRITE,
+    content: '', // Leave content empty for dynamic import
+  },
+  {
+    name: 'Playlist.tsx',
+    isFolder: false,
+    filePath: 'files/Playlist.tsx', 
+    type: FileType.TYPESCRIPT,
+    permissions: Permissions.LISTENONLY,
     content: '', // Leave content empty for dynamic import
   },
   {
@@ -101,5 +94,19 @@ export const fileTreeData: TreeItem[] = [
     type: FileType.PDF,
     permissions: Permissions.READONLY,
     content: '', // Leave content empty for dynamic import
+  },
+  {
+    name: 'src',
+    isFolder: true,
+    children: [
+      {
+        name: 'DayOne.md',
+        isFolder: false,
+        filePath: '/src/files/src/blog-posts/cloud-project/Kube-day-1.md',
+        type: FileType.MARKDOWN,
+        permissions: Permissions.READONLY,
+        content: CloudBlogPost
+      },
+    ]
   },
 ];

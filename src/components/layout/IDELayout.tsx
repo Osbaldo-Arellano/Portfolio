@@ -20,16 +20,18 @@ function IDELayout() {
   const [activeExplorer, setActiveExplorer] = useState("Explorer 1"); // Active file explorer
 
   const explorer1Data = fileTreeData; // Data for Explorer 1
+
   const explorer2Data = [
     { name: "README.md", isFolder: false },
     { name: "assets", isFolder: true, children: [] },
     { name: "components", isFolder: true, children: [] },
   ]; // Data for Explorer 2
+
   const explorer3Data = [
     { name: "README.md", isFolder: false },
     { name: "assets", isFolder: true, children: [] },
     { name: "components", isFolder: true, children: [] },
-  ]; // Data for Explorer 2
+  ]; // Data for Explorer 3
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -42,6 +44,7 @@ function IDELayout() {
 
   const leftContainerRef = useRef<HTMLDivElement>(null);
   const rightContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isMobile && leftContainerRef.current && rightContainerRef.current) {
       Split([leftContainerRef.current, rightContainerRef.current], {
@@ -159,33 +162,35 @@ function IDELayout() {
               } text-black border border-gray-400 rounded-t-lg px-4 py-2 cursor-pointer`}
               style={{
                 marginRight: "2px",
-                marginBottom: activeExplorer === "Explorer 3" ? "0px" : "2px",
+                marginBottom: activeExplorer === "Explorer 2" ? "0px" : "2px",
               }}
-              onClick={() => setActiveExplorer("Explorer 3")}
+              onClick={() => setActiveExplorer("Explorer 2")}
             >
               📂 Personal Projects
             </div>
-
+            
             {/* Explorer 3 Tab */}
             <div
               className={`relative z-10 ${
-                activeExplorer === "Explorer 2"
+                activeExplorer === "Explorer 3"
                   ? "bg-gray-300"
                   : "bg-gray-200 hover:bg-gray-300"
               } text-black border border-gray-400 rounded-t-lg px-4 py-2 cursor-pointer`}
               style={{
                 marginRight: "2px",
-                marginBottom: activeExplorer === "Explorer 2" ? "0px" : "2px",
+                marginBottom: activeExplorer === "Explorer 3" ? "0px" : "2px",
               }}
-              onClick={() => setActiveExplorer("Explorer 2")}
+              onClick={() => setActiveExplorer("Explorer 3")}
             >
               📂 Academic Projects
             </div>
           </div>
 
+          
+
           {/* File Trees for Each Explorer */}
           <div
-            className="flex-grow bg-gray-300 border border-gray-400 p-2 rounded-b-lg overflow-y-auto"
+            className="bg-gray-300 border border-gray-400 p-1 overflow-y-auto"
           >
             {activeExplorer === "Explorer 1" && (
               <FileTree treeData={explorer1Data} onFileSelect={handleFileSelect} />
@@ -198,6 +203,21 @@ function IDELayout() {
             )}
           </div>
         </div>
+        
+        <div className="bg-gray-800 p-1 border border-gray-700 shadow-md">
+          <h4 className="font-bold text-gray-100 mb-2">Terminal</h4>
+          <div className="bg-black text-green-300 p-2 border border-gray-600 h-24 overflow-y-auto">
+            <p>$ npm start</p>
+            <p>Hello, this is Osbaldo's AI clone. Ask me anything!...</p>
+          </div>
+          <input
+            type="text"
+            className="w-full bg-gray-900 text-gray-100 p-1 mt-2 rounded focus:outline-none"
+            placeholder="Ask me something..."
+          />
+        </div>
+
+
       </div>
 
 

@@ -14,7 +14,8 @@ export enum FileType {
 export enum Permissions {
   READONLY = 'readonly',
   WRITE = 'write',
-  EXECUTE = 'execute'
+  EXECUTE = 'execute',
+  LISTENONLY = 'listen'
 }
 
 export type TreeItem = {

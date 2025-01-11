@@ -9,7 +9,8 @@ function FileTree({
   onFileSelect: (node: TreeItem) => void;
 }) {
   return (
-    <div className="file-item w-full h-full bg-gray-200 text-black border border-gray-400 shadow-inner font-sans">
+    // Set a fixed height of 16rem (h-64) and make overflow scrollable
+    <div className="file-item w-full h-64 overflow-y-auto border border-gray-400 font-sans">
       <ul className="mt-2">
         {treeData.map((item, i) => (
           <TreeNode key={i} node={item} onFileSelect={onFileSelect} level={0} />
@@ -36,7 +37,7 @@ function TreeNode({
     return (
       <li style={indentStyle} className="flex flex-col">
         <div
-          className="flex items-center cursor-pointer py-1 px-2 bg-gray-300 hover:bg-gray-200 border border-gray-400 transition-all"
+          className="flex items-center cursor-pointer py-1 px-2 hover:text-gray-900 transition-all"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="mr-2 text-blue-500">
@@ -45,7 +46,7 @@ function TreeNode({
           <span className="font-bold">{node.name}</span>
         </div>
         {isOpen && node.children?.length && (
-          <ul className="ml-4 border-l-2 border-gray-400 pl-2 mt-1">
+          <ul className="ml-4 pl-2 mt-1">
             {node.children.map((child, i: Key | null | undefined) => (
               <TreeNode
                 key={i}
@@ -62,7 +63,7 @@ function TreeNode({
     return (
       <li
         style={indentStyle}
-        className="flex items-center py-1 px-2 bg-gray-200 hover:bg-gray-100 border border-gray-400 cursor-pointer transition-all"
+        className="flex items-center py-1 px-2 cursor-pointer hover:text-gray-900 transition-all"
         onClick={() => onFileSelect(node)}
       >
         <span className="mr-2 text-blue-400">📄</span>
