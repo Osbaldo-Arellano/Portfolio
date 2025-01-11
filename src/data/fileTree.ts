@@ -1,23 +1,21 @@
-import { FileType, TreeItem } from '../types/FileTree';
+import { FileType, Permissions, TreeItem } from '../types/FileTree';
 
 // Import raw file contents directly
 import aboutMeContent from '../files/ABOUTME.md?raw';
-import CloudBlogPost from '../../src/files/src/blog-posts/Kube-day-1.md?raw'
-// src\files\src\blog-posts
+import CloudBlogPost from '../../src/files/src/blog-posts/cloud-project/Kube-day-1.md?raw'
+import CloudBlogPost2 from '../../src/files/src/blog-posts/cloud-project/Kube-day-2.md?raw'
+
+import CapstoneBlogPost from '../../src/files/src/blog-posts/capstone/reflection-1.md?raw'
+import CapstoneBlogPost2 from '../../src/files/src/blog-posts/capstone/reflection-2.md?raw'
+
 export const fileTreeData: TreeItem[] = [
   {
     name: 'ABOUTME.md',
     isFolder: false,
     filePath: 'files/ABOUTME.md',
     type: FileType.MARKDOWN,
+    permissions: Permissions.READONLY,
     content: aboutMeContent,
-  },
-  {
-    name: 'Resume.pdf',
-    isFolder: false,
-    filePath: '/Resume.pdf',
-    type: FileType.PDF,
-    content: '', // Leave content empty for dynamic import
   },
     {
     name: 'Blog Posts',
@@ -28,11 +26,20 @@ export const fileTreeData: TreeItem[] = [
         isFolder: true,
         children: [
           {
-            name: 'Kube Conductor Day One',
+            name: 'DayOne.md',
             isFolder: false,
-            filePath: '/Kube-day-1.md',
+            filePath: '/src/files/src/blog-posts/cloud-project/Kube-day-1.md',
             type: FileType.MARKDOWN,
+            permissions: Permissions.READONLY,
             content: CloudBlogPost
+          },
+          {
+            name: 'DayTwo.md',
+            isFolder: false,
+            filePath: '/src/files/src/blog-posts/cloud-project/Kube-day-1.md',
+            type: FileType.MARKDOWN,
+            permissions: Permissions.READONLY,
+            content: CloudBlogPost2
           },
         ]
       },
@@ -43,19 +50,29 @@ export const fileTreeData: TreeItem[] = [
       {
         name: 'Senior Capstone Project',
         isFolder: true,
+        children: [
+          {
+            name: 'Reflection.md',
+            isFolder: false,
+            filePath: '/src/files/src/blog-posts/capstone/reflection-1.md',
+            type: FileType.MARKDOWN,
+            permissions: Permissions.READONLY,
+            content: CapstoneBlogPost
+          },
+          {
+            name: 'Reflection-2.md',
+            isFolder: false,
+            filePath: '/src/files/src/blog-posts/capstone/reflection-2.md',
+            type: FileType.MARKDOWN,
+            permissions: Permissions.READONLY,
+            content: CapstoneBlogPost2
+          },
+        ]
       },
       // {
       //   name: 'main.tsx',
       //   isFolder: false,
       //   filePath: 'files/Main.tsx', 
-      //   type: FileType.TYPESCRIPT,
-      //   content: '', // Leave content empty for dynamic import
-      // },
-      
-      // {
-      //   name: 'ContactMe.tsx',
-      //   isFolder: false,
-      //   filePath: 'files/ContactMe.tsx', 
       //   type: FileType.TYPESCRIPT,
       //   content: '', // Leave content empty for dynamic import
       // },
@@ -69,5 +86,20 @@ export const fileTreeData: TreeItem[] = [
       // }
       
     ],
+  },
+  {
+    name: 'ContactMe.tsx',
+    isFolder: false,
+    filePath: 'files/ContactMe.tsx', 
+    type: FileType.TYPESCRIPT,
+    content: '', // Leave content empty for dynamic import
+  },
+  {
+    name: 'Resume.pdf',
+    isFolder: false,
+    filePath: '/Resume.pdf',
+    type: FileType.PDF,
+    permissions: Permissions.READONLY,
+    content: '', // Leave content empty for dynamic import
   },
 ];

@@ -11,11 +11,18 @@ export enum FileType {
   PDF = 'pdf'
 }
 
+export enum Permissions {
+  READONLY = 'readonly',
+  WRITE = 'write',
+  EXECUTE = 'execute'
+}
+
 export type TreeItem = {
   name: string; 
   isFolder: boolean;
   filePath?: string; 
   content?: string | (() => JSX.Element); 
   type?: FileType; 
+  permissions?: Permissions;
   children?: TreeItem[];
 };
