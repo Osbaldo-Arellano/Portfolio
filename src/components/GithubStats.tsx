@@ -22,11 +22,7 @@ const GitHubStats: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   // Replace with your actual token or remove entirely if you don't need authorized calls
-<<<<<<< HEAD
-  const GITHUB_TOKEN = "ADD_TOKEN";
-=======
   const GITHUB_TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
->>>>>>> cbdfe7e (Remove token)
 
   useEffect(() => {
     const fetchGitHubStats = async () => {
