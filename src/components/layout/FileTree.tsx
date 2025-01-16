@@ -1,4 +1,4 @@
-import React, { Key } from "react";
+import React from "react";
 import { TreeItem } from "../../types/FileTree";
 
 function FileTree({
@@ -9,18 +9,29 @@ function FileTree({
   onFileSelect: (node: TreeItem) => void;
 }) {
   return (
-    // Set a fixed height of 16rem (h-64) and make overflow scrollable
+    // Retain a fixed height with overflow as you had, but using a table
     <div className="file-item w-full h-64 overflow-y-auto border border-gray-400 font-sans">
-      <ul className="mt-2">
-        {treeData.map((item, i) => (
-          <TreeNode key={i} node={item} onFileSelect={onFileSelect} level={0} />
-        ))}
-      </ul>
+      <table className="min-w-full text-left">
+        {/* Header */}
+        <thead className="bg-gray-100 border-b border-gray-400">
+          <tr>
+            <th className="px-2 py-2 w-1/3">Name</th>
+            <th className="px-2 py-2">Permissions</th>
+            <th className="px-2 py-2">Type</th>
+          </tr>
+        </thead>
+        {/* Body (recursive rows) */}
+        <tbody>
+          {treeData.map((item, i) => (
+            <TreeRow key={i} node={item} onFileSelect={onFileSelect} level={0} />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-function TreeNode({
+function TreeRow({
   node,
   onFileSelect,
   level,
@@ -31,46 +42,71 @@ function TreeNode({
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const indentStyle = { paddingLeft: `${level * 1.5}rem` };
+  // Indent the first column (Name) to mimic nested folders/files
+  const indentPx = level * 24; // ~1.5rem increments
 
+  // If it's a folder, render a folder row + (if open) child rows
   if (node.isFolder) {
-    return (
-      <li style={indentStyle} className="flex flex-col">
-        <div
-          className="flex items-center cursor-pointer py-1 px-2 hover:text-gray-900 transition-all"
+    // The row for this folder
+    const folderRow = (
+      <tr
+        className="hover:text-gray-900 transition-all"
+        // If you want the whole row clickable, attach onClick to <tr>; 
+        // or keep it on the <td> where the name is. This is personal preference.
+      >
+        <td
+          className="py-1 px-2 cursor-pointer font-bold"
+          style={{ paddingLeft: indentPx }}
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          <span className="mr-2 text-blue-500">
-            {isOpen ? "📂" : "📁"}
-          </span>
-          <span className="font-bold">{node.name}</span>
-        </div>
-        {isOpen && node.children?.length && (
-          <ul className="ml-4 pl-2 mt-1">
-            {node.children.map((child, i: Key | null | undefined) => (
-              <TreeNode
-                key={i}
-                node={child}
-                onFileSelect={onFileSelect}
-                level={level + 1}
-              />
-            ))}
-          </ul>
-        )}
-      </li>
+          <span className="mr-2 text-blue-500">{isOpen ? "📂" : "📁"}</span>
+          {node.name}
+        </td>
+        {/* Placeholder cells for the other columns */}
+        <td className="py-1 px-2 text-gray-700">{node.permissions}</td>
+        <td className="py-1 px-2 text-gray-700">Folder</td>
+      </tr>
     );
-  } else {
+
+    // If open, render child rows after the folder row
+    let childRows: JSX.Element[] = [];
+    if (isOpen && node.children) {
+      childRows = node.children.map((child, idx) => (
+        <TreeRow
+          key={idx}
+          node={child}
+          onFileSelect={onFileSelect}
+          level={level + 1}
+        />
+      ));
+    }
+
     return (
-      <li
-        style={indentStyle}
-        className="flex items-center py-1 px-2 cursor-pointer hover:text-gray-900 transition-all"
-        onClick={() => onFileSelect(node)}
-      >
-        <span className="mr-2 text-blue-400">📄</span>
-        <span>{node.name}</span>
-      </li>
+      <>
+        {folderRow}
+        {childRows}
+      </>
     );
   }
+
+  // If it's a file, return a single <tr> (row) with columns
+  return (
+    <tr
+      className="hover:text-gray-900 transition-all cursor-pointer"
+      onClick={() => onFileSelect(node)}
+    >
+      <td
+        className="py-1 px-2"
+        style={{ paddingLeft: indentPx }}
+      >
+        <span className="mr-2 text-blue-400">📄</span>
+        {node.name}
+      </td>
+      {/* Placeholder columns for your table layout */}
+      <td className="py-1 px-2 text-gray-700">{node.permissions}</td>
+      <td className="py-1 px-2 text-gray-700">File</td>
+    </tr>
+  );
 }
 
 export default FileTree;

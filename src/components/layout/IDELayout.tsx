@@ -6,6 +6,8 @@ import { fileTreeData } from "../../data/fileTree";
 import FileDetail from "../FileDetail";
 import { TreeItem } from "../../types/FileTree";
 import MobileIDELayout from "./MobileIDELayout";
+import Dashboard from "../Dashboard";
+import GitHubStats from "../GithubStats";
 
 function IDELayout() {
   const aboutMeFile =
@@ -188,35 +190,26 @@ function IDELayout() {
 
           
 
-          {/* File Trees for Each Explorer */}
-          <div
-            className="bg-gray-300 border border-gray-400 p-1 overflow-y-auto"
-          >
-            {activeExplorer === "Explorer 1" && (
-              <FileTree treeData={explorer1Data} onFileSelect={handleFileSelect} />
-            )}
-            {activeExplorer === "Explorer 2" && (
-              <FileTree treeData={explorer2Data} onFileSelect={handleFileSelect} />
-            )}
-            {activeExplorer === "Explorer 3" && (
-              <FileTree treeData={explorer3Data} onFileSelect={handleFileSelect} />
-            )}
-          </div>
-        </div>
-        
-        <div className="bg-gray-800 p-1 border border-gray-700 shadow-md">
-          <h4 className="font-bold text-gray-100 mb-2">Terminal</h4>
-          <div className="bg-black text-green-300 p-2 border border-gray-600 h-24 overflow-y-auto">
-            <p>$ npm start</p>
-            <p>Hello, this is Osbaldo's AI clone. Ask me anything!...</p>
-          </div>
-          <input
-            type="text"
-            className="w-full bg-gray-900 text-gray-100 p-1 mt-2 rounded focus:outline-none"
-            placeholder="Ask me something..."
-          />
-        </div>
+{/* File Trees for Each Explorer */}
+<div className="bg-gray-300 border border-gray-400 p-2 overflow-y-auto">
+  {activeExplorer === "Explorer 1" && (
+    <FileTree treeData={explorer1Data} onFileSelect={handleFileSelect} />
+  )}
+  {activeExplorer === "Explorer 2" && (
+    <FileTree treeData={explorer2Data} onFileSelect={handleFileSelect} />
+  )}
+  {activeExplorer === "Explorer 3" && (
+    <FileTree treeData={explorer3Data} onFileSelect={handleFileSelect} />
+  )}
+</div>
 
+
+          {/* Dashboard */}
+          <div className="flex flex-col flex-grow mt-1 bg-gray-300 border border-gray-400 p-2 overflow-y-auto">
+            <GitHubStats />
+          </div>
+          
+        </div>
 
       </div>
 
