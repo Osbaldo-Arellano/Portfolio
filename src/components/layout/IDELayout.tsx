@@ -186,23 +186,20 @@ function IDELayout() {
             >
               📂 Academic Projects
             </div>
+          </div>  
+
+          {/* File Trees for Each Explorer */}
+          <div className="bg-gray-300 border border-gray-400 p-2 overflow-y-auto">
+            {activeExplorer === "Explorer 1" && (
+              <FileTree treeData={explorer1Data} onFileSelect={handleFileSelect} />
+            )}
+            {activeExplorer === "Explorer 2" && (
+              <FileTree treeData={explorer2Data} onFileSelect={handleFileSelect} />
+            )}
+            {activeExplorer === "Explorer 3" && (
+              <FileTree treeData={explorer3Data} onFileSelect={handleFileSelect} />
+            )}
           </div>
-
-          
-
-{/* File Trees for Each Explorer */}
-<div className="bg-gray-300 border border-gray-400 p-2 overflow-y-auto">
-  {activeExplorer === "Explorer 1" && (
-    <FileTree treeData={explorer1Data} onFileSelect={handleFileSelect} />
-  )}
-  {activeExplorer === "Explorer 2" && (
-    <FileTree treeData={explorer2Data} onFileSelect={handleFileSelect} />
-  )}
-  {activeExplorer === "Explorer 3" && (
-    <FileTree treeData={explorer3Data} onFileSelect={handleFileSelect} />
-  )}
-</div>
-
 
           {/* Dashboard */}
           <div className="flex flex-col flex-grow mt-1 bg-gray-300 border border-gray-400 p-2 overflow-y-auto">
@@ -214,65 +211,66 @@ function IDELayout() {
       </div>
 
 
-      {/* Right Panel */}
+      {/** Right Panel **/}
       <div
         ref={rightContainerRef}
         className="flex-grow bg-gray-200 flex flex-col overflow-hidden border-l"
       >
-      {/* Tabs */}
-      <div className="flex border-b border-gray-400 bg-gray-300 flex-shrink-0">
-        {openTabs.map((tab, index) => (
-          <div
-            key={index}
-            draggable
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={(e) => e.preventDefault()} // Allow drop by preventing default behavior
-            onDrop={(e) => handleDrop(e, index)}
-            className={`flex items-center px-4 py-1 cursor-pointer border-r border-gray-400 ${
-              activeTab === tab
-                ? "bg-gray-400 text-black"
-                : "bg-gray-300 text-black hover:bg-gray-200"
-            }`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab.name}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCloseTab(tab);
-              }}
-              className="ml-2 text-red-600 hover:text-red-800"
+        {/* Tab Bar */}
+        <div className="flex border-b border-gray-400 bg-gray-300 flex-shrink-0">
+          {openTabs.map((tab, index) => (
+            <div
+              key={index}
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => handleDrop(e, index)}
+              className={`flex items-center px-4 py-1 cursor-pointer border-r border-gray-400 ${
+                activeTab === tab
+                  ? "bg-gray-400 text-black"
+                  : "bg-gray-300 text-black hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab(tab)}
             >
-              ✕
-            </button>
-          </div>
-        ))}
-      </div>
+              {tab.name}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCloseTab(tab);
+                }}
+                className="ml-2 text-red-600 hover:text-red-800"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
 
         {/* Content Area */}
-        <div
-          className="flex-grow bg-white text-black border-t border-gray-400 overflow-hidden"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {activeTab ? (
-            <div className="flex-grow overflow-auto">
-              <FileDetail
-                fileNode={activeTab}
-                onClose={() => handleCloseTab(activeTab)}
-              />
+        <div className="flex-grow bg-white text-black border-t border-gray-400 relative">
+            {openTabs.length > 0 ? (
+              // Loop over ALL open tabs to keep them mounted, 
+              // but show only the active one
+              openTabs.map((tab, i) => (
+                <div
+                  key={tab.name + i}
+                  className="absolute inset-0 overflow-auto"
+                  style={{
+                    display: activeTab === tab ? "block" : "none",
+                  }}
+                >
+                  <FileDetail fileNode={tab} onClose={() => handleCloseTab(tab)} />
+                </div>
+              ))
+            ) : (
+              // No open tabs
+              <div className="flex items-center justify-center h-full text-gray-600">
+                <p>No tab selected.</p>
+              </div>
+            )}
             </div>
-          ) : (
-            <div className="flex items-center justify-center h-full text-gray-600">
-              <p>No tab selected.</p>
-            </div>
-          )}
-        </div>
+        </div>  
       </div>
-
-    </div>
   );
 }
 
